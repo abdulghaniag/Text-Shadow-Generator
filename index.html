@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ 
+<style>
+.main-heading {
+    font-size: 42px;
+    color: #007BFF;
+    text-align: center;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+    background: linear-gradient(to right, #007BFF, #00C6FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.main-heading::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(to right, #007BFF, #00C6FF);
+    border-radius: 2px;
+}
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+        background-color: #f0f0f0;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-container {
+        margin-bottom: 30px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    #userData {
+        padding: 10px 15px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        width: 300px;
+        transition: all 0.3s ease;
+    }
+
+    #userData:focus {
+        border-color: #007BFF;
+        outline: none;
+        box-shadow: 0 0 5px #007BFF;
+    }
+
+    #sub {
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #sub:hover {
+        background-color: #0056b3;
+    }
+
+    #text {
+        margin-top: 30px;
+        font-size: 60px;
+        font-weight: bold;
+        text-align: center;
+        min-height: 100px;
+        transition: all 0.3s ease;
+    }
+
+    .controls {
+        position: absolute;
+        left: 30px;
+        top: 150px;
+        width: 250px;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .controls label {
+        display: block;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+
+    .controls input[type="range"],
+    .controls input[type="color"] {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+
+    @media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .input-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #userData {
+        width: 100%;
+    }
+
+    #sub {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .controls {
+        position: static;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #text {
+        font-size: 40px;
+        min-height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    #text {
+        font-size: 32px;
+    }
+}
+
+</style> 
+
+
+
+
+
+
+</head>
+<body>
+         <h1 class="main-heading">Text Shadow Generator</h1>
+
+    <div class="input-container">
+        <input type="text" id="userData" placeholder="Enter your text to convert shadow property">
+        <button id="sub">Submit</button>
+    </div>
+    <div id="text">"Your Stylish Text Appears Here"</div>
+<br><br>
+    
+    <div class="controls">
+    <h2 style="margin-bottom: 15px; font-size: 20px; color: #333;">Text Shadow Controls</h2>
+
+    <label> Horizantally (x) :
+        <input type="range"  id="horizantally" min="-100" max="100" value="0">
+    </label>    
+
+    <label> Vertically (y) :
+        <input type="range"  id="vertically" min="-100" max="100" value="0">
+    </label>    
+    <label> Shadow :
+        <input type="range" id="shadow"  min="0" max="100" value="10">
+    </label>
+
+    <label> Color :
+        <input type="color" id="color" value="#000000">
+    </label>
+</div>
+
+    <script>
+    let userData = document.getElementById("userData")
+    let text = document.getElementById("text");
+    let xRange = document.getElementById("horizantally");
+    let yRange = document.getElementById("vertically");
+    let shadow = document.getElementById("shadow");
+    let colorPicker = document.getElementById("color");
+
+
+    function updateShadow(){
+        let x = xRange.value;
+        let y = yRange.value;
+        let blurRange = shadow.value;
+        let color = colorPicker.value;
+          
+        text.style.textShadow = `${x}px ${y}px ${blurRange}px ${color}`
+        
+    }
+      document.getElementById("sub").addEventListener("click" , function(){
+         text.textContent = userData.value;
+         updateShadow();
+      });
+
+      xRange.addEventListener("input" , updateShadow);
+      yRange.addEventListener("input" , updateShadow);
+      shadow.addEventListener("input" , updateShadow);
+      colorPicker.addEventListener("input" , updateShadow);
+
+
+
+    </script>
+    
+</body>
+</html>
